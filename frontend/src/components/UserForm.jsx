@@ -37,7 +37,7 @@ return (
         {({ field }) => (
           <MDBInput required className='mb-4' id='formControlLg' label='Name' {...field}/>)}
         </Field>
-      <MDBInput required className='mb-4' type='Phone' id='formControlLg' label='Phone Number' />
+      <MDBInput required className='mb-4'  id='formControlLg' label='Phone Number' />
 
       <MDBBtn type='submit' block>
         Subscribe

@@ -4,6 +4,12 @@ import { FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, Button
 
 const SignUpForm = () => {
   
+  //TODO: Implement
+  function addUser(name, phone) {
+    //Send add user request here
+    return;
+  }
+
   //TODO: Add name constraints
   function validateName(value) {
     let error;
