@@ -1,13 +1,12 @@
 import './App.css';
-import UserForm from './components/form'
+import { Heading } from '@chakra-ui/react'
+import SignUpForm from './components/Form'
 
 function App() {
   return (
     <div className="App">
-      <header>
-        <h1>Receive Dog Pictures Daily</h1> 
-      </header>
-      <UserForm />   
+      <Heading>Recieve Dog Pictures Daily!</Heading>
+      <SignUpForm />  
     </div>
   );
 }
