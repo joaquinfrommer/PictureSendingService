@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "Express backend to add users to service",
-  "main": "app.js",
+  "main": "express_api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
