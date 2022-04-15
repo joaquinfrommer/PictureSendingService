@@ -11,6 +11,12 @@ app.use(express.json());
 app.use(cors());
 
 const registerRoutes = () => {
+
+    //Greetings
+    app.get( "/", ( req, res ) => {
+        res.status(OK).json({'message': 'GUAC ON DA BEAT'})
+    });
+
     // To add a user. User info will be in request body. 
     app.put( "/", ( req, res ) => {
         console.log(req)
