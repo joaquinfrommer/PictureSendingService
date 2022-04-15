@@ -4,9 +4,7 @@
   "description": "Express backend to add users to service",
   "main": "express_api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm run build && node build/express_api.js",
-    "build": "tsc -p ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
