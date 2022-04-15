@@ -9,6 +9,8 @@ jobs:
     name: deploy serverless backend
     runs-on: ubuntu-latest
     steps:
+    - run: pwd
+    - run: ls
     - run: cd backend
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
