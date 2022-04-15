@@ -13,7 +13,7 @@ provider:
 
 functions:
   Api:
-    handler: src/express_api.handler
+    handler: build/express_api.handler
     events: 
       - http:
           path: /
@@ -24,7 +24,7 @@ functions:
           method: ANY
           cors: true
   Sender:
-    handler: src/sender.handler
+    handler: build/sender.handler
     events:
       - schedule: rate(12 hours)
       - schedule: cron(0 10 * * ? *)
