@@ -11,7 +11,7 @@ jobs:
     steps:
     - run: pwd
     - run: ls
-    - run: cd backend
+    - run: cd ./backend
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
