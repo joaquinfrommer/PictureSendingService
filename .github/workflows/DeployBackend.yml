@@ -22,8 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm install
       - run: node ./node_modules/serverless/bin/serverless.js config credentials --provider aws --key ${{ secrets.AWS_AKEY_ID }} --secret ${{ secrets.AWS_AKEY_KEY }}
-      - run: node ../../node_modules/serverless/bin/serverless.js deploy --stage prod --verbose
-        
+      - run: node ./node_modules/serverless/bin/serverless.js deploy --stage prod --verbose 
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.secrets.AWS_AKEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.secrets.AWS_AKEY_KEY }}
