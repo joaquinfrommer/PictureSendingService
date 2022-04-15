@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+
+defaults:
+ run:
+  working-directory: ./backend
+  
 jobs:
   deploy_backend:
     name: deploy serverless backend
