@@ -20,6 +20,7 @@ jobs:
       - run: npm install
         working-directory: ./backend
       - run: node ./node_modules/serverless/bin/serverless.js config credentials --provider aws --key ${{ secrets.AWS_AKEY_ID }} --secret ${{ secrets.AWS_AKEY_KEY }}
+        working-directory: ./backend
       - run: node ../../node_modules/serverless/bin/serverless.js deploy --stage prod --verbose
         working-directory: ./backend
         env:
