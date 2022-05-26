@@ -36,9 +36,9 @@ const registerRoutes = () => {
 
     // To delete a user. User info stored in body
     app.delete( "/", ( req, res ) => {
-        if(req.body.phone) { 
-            const phone = req.body.phone;
-            if (delUser(phone)) {
+        if(req.body.name && req.body.phone) { 
+            const user = {Name: req.body.name, Phone: req.body.phone};
+            if (delUser(user)) {
                 res.status(OK);
             }
             else {

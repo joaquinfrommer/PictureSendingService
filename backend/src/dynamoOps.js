@@ -1,36 +1,40 @@
-import DynamoDB from 'aws-sdk'
+import { DynamoDBClient, PutItemCommand, DeleteItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 
 const tableName = process.env.TABLE_NAME || 'PicSenderUserTable';
-const client =  new DynamoDB.DocumentClient();
+const ddbClient = new DynamoDBClient({ region: "us-east-1" });
 
 //Adds user, takes in a user object
 //User object:
-//{name: 'name', phone: 'phone #'}
+//{Name: 'name', Phone: 'phone #'}
 export function addUser(user) {
-    const addUserResult = () => {
+    const params = {
+        TableName : tableName,
+        Item: user
+    };
+    const addUserResult = async () => {
+
         try {
-            client.put({
-                TableName : tableName,
-                Item: user
-            }).promise()
+            const data = await ddbClient.send(new PutItemCommand(params));
+            console.log("Success, user added", data);
             return true;
         } catch (e) {
             console.log(e);
             return false;
         }
-    }
+    };
     return addUserResult;
 }
 
-//Deletes user from the dynamodb table, takes in a correctly formatted phone string
-export function delUser(phone) {
+//Deletes user from the dynamodb table, {Name: 'name', Phone: 'phone #'}
+export function delUser(user) {
     let params = {
         TableName: tableName,
-        Key: {Phone: phone}
+        Key: {Phone: user.Phone, Name: user.Name}
     };
-    const delResult = () => {
+    const delResult = async () => {
         try {
-            this.client.delete(params).promise()
+            const data = await ddbClient.send(new DeleteItemCommand(params));
+            console.log("Success, user deleted", data);
             return true;
         } catch (e) {
             console.log(e);
@@ -42,10 +46,11 @@ export function delUser(phone) {
 
 //Gets a list of all users signed up for the service 
 export function allUsers() {
-    let params = {TableName: tableName};
-    const scanResult = () => {
+    const params = {TableName: tableName};
+    const scanResult = async () => {
         try {
-            const data = this.client.scan(params).promise()
+            const data = await ddbClient.send(new QueryCommand(params));
+            console.log(data);
             return data;
         } catch (e) {
             console.log(e);

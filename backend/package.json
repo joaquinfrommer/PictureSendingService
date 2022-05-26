@@ -10,7 +10,7 @@
   "author": "Joaquin Frommer",
   "license": "ISC",
   "dependencies": {
-    "aws-sdk": "^2.1081.0",
+    "aws-sdk": "^2.1144.0",
     "express": "^4.17.3",
     "serverless": "^3.14.0"
   }
