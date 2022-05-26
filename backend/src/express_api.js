@@ -1,7 +1,7 @@
 import express from 'express';
 import 'dotenv/config';
-import { addUser, delUser } from './dynamoDB'
-import { BAD_REQUEST, OK } from './StatusCode';
+import { addUser, delUser } from './dynamoDB.js'
+import { BAD_REQUEST, OK } from './StatusCode.js';
 
 const app = express();
 const port = 8080; // default port to listen
