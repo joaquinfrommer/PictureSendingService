@@ -1,6 +1,6 @@
 import express from 'express';
 import 'dotenv/config';
-import { addUser, delUser } from './dynamoDB.js'
+import { addUser, delUser } from './dynamoOps.js'
 import { BAD_REQUEST, OK } from './StatusCode.js';
 
 const app = express();

@@ -1,4 +1,4 @@
-import { allUsers } from './dynamoDB.js'
+import { allUsers } from './dynamoOps.js'
 
 function getImage() {
     //TODO
