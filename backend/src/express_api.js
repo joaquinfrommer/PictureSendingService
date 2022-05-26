@@ -1,12 +1,12 @@
 import express from 'express';
+import serverless from 'serverless-http';
+import cors from 'cors';
 import 'dotenv/config';
 import { addUser, delUser } from './dynamoOps.js'
 import { BAD_REQUEST, OK } from './StatusCode.js';
 
 const app = express();
 const port = 8080; // default port to listen
-const serverless = require('serverless-http');
-var cors = require('cors');
 app.use(express.json());
 app.use(cors());
 
