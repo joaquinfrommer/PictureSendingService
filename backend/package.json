@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Express backend to add users to service",
   "main": "src/express_api.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
