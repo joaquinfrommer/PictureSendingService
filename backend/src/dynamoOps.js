@@ -1,4 +1,4 @@
-import { DynamoDB } from 'aws-sdk'
+import DynamoDB from 'aws-sdk'
 
 const tableName = process.env.TABLE_NAME || 'PicSenderUserTable';
 const client =  new DynamoDB.DocumentClient();
