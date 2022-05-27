@@ -1,6 +1,6 @@
 import { DynamoDBClient, PutItemCommand, DeleteItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
 
-const tableName = process.env.TABLE_NAME || 'PicSenderUserTable';
+const tableName = 'PicSenderUserTable';
 const ddbClient = new DynamoDBClient({ region: "us-east-1" });
 
 //Adds user, takes in a user object
@@ -12,7 +12,7 @@ export async function addUser(user) {
         TableName : tableName,
         Item: user
     };
-
+    
     try {
         const data = await ddbClient.send(new PutItemCommand(params));
         console.log("Success, user added", data);
