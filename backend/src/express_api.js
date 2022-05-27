@@ -14,39 +14,40 @@ const registerRoutes = () => {
 
     //Greetings
     app.get( "/", ( req, res ) => {
-        res.status(OK).json({'message': 'GUAC ON DA BEAT'})
+        res.status(OK).json({'message': 'GUAC ON DA BEAT'}).end()
     });
 
     // To add a user. User info will be in request body. 
-    app.put( "/", ( req, res ) => {
-        console.log(req)
+    app.put( "/", async ( req, res ) => {
         if(req.body.name && req.body.phone) { 
             const user = {Name: req.body.name, Phone: req.body.phone};
-            if (addUser(user)) {
-                res.status(OK);
+            const result = await addUser(user);
+            if (result) {
+                res.status(OK).end();
             }
             else {
-                res.status(BAD_REQUEST);
+                res.status(BAD_REQUEST).end();
             }
         }
         else {
-            res.status(BAD_REQUEST)
+            res.status(BAD_REQUEST).end()
         }
     });
 
     // To delete a user. User info stored in body
-    app.delete( "/", ( req, res ) => {
+    app.delete( "/", async ( req, res ) => {
         if(req.body.name && req.body.phone) { 
             const user = {Name: req.body.name, Phone: req.body.phone};
-            if (delUser(user)) {
-                res.status(OK);
+            const result = await delUser(user);
+            if (result) {
+                res.status(OK).end();
             }
             else {
-                res.status(BAD_REQUEST);
+                res.status(BAD_REQUEST).end();
             }
         }
         else {
-            res.status(BAD_REQUEST)
+            res.status(BAD_REQUEST).end();
         }
     }) 
 }
