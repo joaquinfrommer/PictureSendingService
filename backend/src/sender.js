@@ -26,4 +26,4 @@ function send() {
     return ; 
 }
 
-module.exports.handler = send;
+exports.handler = send;
