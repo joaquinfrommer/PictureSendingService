@@ -57,4 +57,4 @@ app.listen( port, () => {
     console.log( `server started listening at port: ${ port }` );
 });
     
-exports.handler = serverless(app);
+export const handler = serverless(app);

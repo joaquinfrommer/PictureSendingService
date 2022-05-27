@@ -26,4 +26,4 @@ function send() {
     return ; 
 }
 
-exports.handler = send;
+export const handler = send;
