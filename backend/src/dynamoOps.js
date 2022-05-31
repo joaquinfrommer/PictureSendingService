@@ -1,4 +1,5 @@
-import { DynamoDBClient, PutItemCommand, DeleteItemCommand, QueryCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBClient, PutItemCommand, DeleteItemCommand, ScanCommand } from "@aws-sdk/client-dynamodb";
+import 'dotenv/config';
 
 const tableName = 'PicSenderUserTable';
 const ddbClient = new DynamoDBClient({ region: "us-east-1" });
@@ -40,13 +41,17 @@ export async function delUser(user) {
     }
 }
 
+function mapData(data) {
+    const user = {'Phone': data.Phone.S, 'Name': data.Name.S};
+    return user;
+}
+
 //Gets a list of all users signed up for the service 
 export async function allUsers() {
     const params = {TableName: tableName};
     try {
-        const data = await ddbClient.send(new QueryCommand(params));
-        console.log(data);
-        return data;
+        const data = await ddbClient.send(new ScanCommand(params));
+        return data.Items.map(mapData);
     } catch (e) {
         console.log(e);
         return null;

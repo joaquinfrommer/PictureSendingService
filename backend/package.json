@@ -13,9 +13,12 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.100.0",
     "aws-sdk": "^2.1144.0",
+    "axios": "^0.27.2",
     "cors": "^2.8.5",
     "express": "^4.17.3",
+    "https": "^1.0.0",
     "serverless": "^3.14.0",
-    "serverless-http": "^3.0.1"
+    "serverless-http": "^3.0.1",
+    "twilio": "^3.77.1"
   }
 }
