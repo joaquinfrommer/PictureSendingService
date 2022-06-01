@@ -32,7 +32,7 @@ async function make_request(name, phone, act) {
         try {
             const res = await axios.put(endpoint, body);
             console.log(res);
-            alert(`Success! ${name} has been with the phone # ${phone}.`);
+            alert(`Success! ${name} has been added with the phone # ${phone}.`);
         } catch (e) {
             console.error(e);
             alert("Something went wrong, make sure all info is correct and the user is not already added.");
