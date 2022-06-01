@@ -1,13 +1,14 @@
 import './App.css';
-import { Heading } from '@chakra-ui/react'
-import SignUpForm from './components/Form'
+import { ChakraProvider } from '@chakra-ui/react';
+import Form from './components/SubForm'
 
 function App() {
   return (
-    <div className="App">
-      <Heading>Recieve Dog Pictures Daily!</Heading>
-      <SignUpForm />  
-    </div>
+    <ChakraProvider>
+      <div className="App">
+        <Form /> 
+      </div>
+    </ChakraProvider>
   );
 }
 
