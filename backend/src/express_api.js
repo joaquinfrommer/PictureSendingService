@@ -47,7 +47,7 @@ const registerRoutes = () => {
             }
         }
         else {
-            res.status(BAD_REQUEST).end();
+            res.status(402).end();
         }
     }) 
 }
