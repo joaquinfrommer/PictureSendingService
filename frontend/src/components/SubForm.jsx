@@ -40,7 +40,7 @@ async function make_request(name, phone, act) {
     }
     else if (act === 'del') {
         try {
-            const res = await axios.delete(endpoint, body);
+            const res = await axios.delete(endpoint, {data: body});
             console.log(res);
             alert(`Sorry to see you go, ${name} at ${phone} has been successfully deleted.`);
         } catch (e) {
