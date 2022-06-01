@@ -28,7 +28,7 @@ function send_picture(user, image) {
     const user_name = user.Name;
     const user_phone = user.Phone;
     try {
-        message = twClient.messages.create({
+        const message = twClient.messages.create({
             body: `Hi ${user_name}! Enjoy your dog :)`,
             from: twlPhone,
             mediaUrl: [image],
