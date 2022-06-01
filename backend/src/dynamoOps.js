@@ -28,7 +28,7 @@ export async function addUser(user) {
 export async function delUser(user) {
     let params = {
         TableName: tableName,
-        Key: {Phone: user.Phone, Name: user.Name}
+        Key: user
     };
 
     try {
