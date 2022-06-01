@@ -27,18 +27,17 @@ function send_error() {
 function send_picture(user, image) {
     const user_name = user.Name;
     const user_phone = user.Phone;
-
-    twClient.messages.create({
-     body: `Hi ${user_name}! Enjoy your dog :)`,
-     from: twlPhone,
-     mediaUrl: [image],
-     to: user_phone
-   })
-  .then(message => console.log(message.sid))
-  .catch(e => {
-      console.log(e);
-  });
-  console.log("Sent!");
+    try {
+        message = twClient.messages.create({
+            body: `Hi ${user_name}! Enjoy your dog :)`,
+            from: twlPhone,
+            mediaUrl: [image],
+            to: user_phone
+          });
+        console.log("Sent!", message.sid)
+    } catch(e) {
+        console.log(e);
+    }
 }
 
 async function send() {
