@@ -38,6 +38,7 @@ function send_picture(user, image) {
   .catch(e => {
       console.log(e);
   });
+  console.log("Sent!");
 }
 
 async function send() {
