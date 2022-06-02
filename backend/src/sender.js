@@ -36,8 +36,10 @@ async function send_picture(user, image) {
             mediaUrl: [image],
             to: user_phone
           });
+        callback(null, {result: 'success'});
         return message;
     } catch (e) {
+        callback("error");
         return e;
     }
 }
