@@ -8,6 +8,7 @@ const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const twlPhone = process.env.TW_PHONE
 const twClient = new twilio(accountSid, authToken);
+console.log(accountSid, authToken, twlPhone);
 
 async function getImage() {
     try {
@@ -24,21 +25,20 @@ function send_error() {
     console.log("DynamoDB Issue!")
 }
 
-async function send_picture(user, image) {
+function send_picture(user, image) {
     const user_name = user.Name;
     const user_phone = user.Phone;
-    try {
-        const message = await twClient.messages.create({
-            body: `Hi ${user_name}! Enjoy your dog :)`,
-            from: twlPhone,
-            mediaUrl: [image],
-            to: user_phone
-          });
-        console.log(message);
-        console.log("Sent!");
-    } catch(e) {
-        console.log(e);
-    }
+
+    twClient.messages.create({
+        body: `Hi ${user_name}! Enjoy your dog :)`,
+        from: twlPhone,
+        mediaUrl: [image],
+        to: user_phone
+      }).then((message) => {
+          console.log("Sent!", message.sid);
+      }).catch((e) => {
+          console.log(e);
+      });
 }
 
 async function send() {
@@ -50,7 +50,7 @@ async function send() {
         return ;
     }
     console.log("Attempting to send to users in list", users);
-    users.forEach(user => await send_picture(user, img))
+    users.forEach(user => send_picture(user, img))
     return ; 
 }
 
