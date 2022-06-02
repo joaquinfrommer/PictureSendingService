@@ -43,14 +43,13 @@ function send_picture(user, image) {
 }
 
 async function send() {
-    console.log("Attempting to send!")
     const img = await getImage();
     const users = await allUsers();
     if (!users || !img) {
         send_error();
         return ;
     }
-    console.log("Attempting to send to users in list", users);
+    console.log("Attempting to send to users in list", users, ", sending image", img);
     users.forEach(user => send_picture(user, img))
     return ; 
 }
