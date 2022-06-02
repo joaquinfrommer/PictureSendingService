@@ -8,7 +8,6 @@ const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const twlPhone = process.env.TW_PHONE
 const twClient = new twilio(accountSid, authToken);
-console.log(accountSid, authToken, twlPhone);
 
 async function getImage() {
     try {
@@ -36,8 +35,10 @@ function send_picture(user, image) {
         to: user_phone
       }).then((message) => {
           console.log("Sent!", message.sid);
+          return callback();
       }).catch((e) => {
           console.log(e);
+          return callback(e);
       });
 }
 
