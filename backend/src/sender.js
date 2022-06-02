@@ -50,7 +50,7 @@ async function send() {
         return ;
     }
     console.log("Attempting to send to users in list", users);
-    users.forEach(user => send_picture(user, img))
+    users.forEach(user => await send_picture(user, img))
     return ; 
 }
 
