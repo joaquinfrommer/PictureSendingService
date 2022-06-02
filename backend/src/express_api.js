@@ -3,7 +3,7 @@ import serverless from 'serverless-http';
 import cors from 'cors';
 import 'dotenv/config';
 import { addUser, delUser } from './dynamoOps.js'
-import { BAD_REQUEST, OK } from './StatusCode.js';
+import { BAD_REQUEST, ERROR_REQUEST, OK } from './StatusCode.js';
 
 const app = express();
 const port = 8080; // default port to listen
@@ -47,7 +47,7 @@ const registerRoutes = () => {
             }
         }
         else {
-            res.status(402).end();
+            res.status(ERROR_REQUEST).end();
         }
     }) 
 }

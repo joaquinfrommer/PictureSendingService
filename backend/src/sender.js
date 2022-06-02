@@ -34,7 +34,8 @@ function send_picture(user, image) {
             mediaUrl: [image],
             to: user_phone
           });
-        console.log("Sent!", message.sid)
+        console.log(message);
+        console.log("Sent!");
     } catch(e) {
         console.log(e);
     }

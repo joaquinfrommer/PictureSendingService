@@ -26,13 +26,14 @@ const endpoint = 'https://jblcb1xi2a.execute-api.us-east-1.amazonaws.com/prod/'
 async function make_request(name, phone, act) {
     const p1 = "+1";
     const format_phone = p1 + phone;
+    pretty_phone = `(${phone.substring(0,3)})-${phone.substring(3,6)}-${phone.substring(6)}`
     const body = {"name": name, "phone": format_phone};
 
     if(act === 'add') {
         try {
             const res = await axios.put(endpoint, body);
             console.log(res);
-            alert(`Success! ${name} has been added with the phone # ${phone}.`);
+            alert(`Success! Welcome ${name}, you have been registered at ${pretty_phone}. You will now recieve daily dog pictures :)`);
         } catch (e) {
             console.error(e);
             alert("Something went wrong, make sure all info is correct and the user is not already added.");
@@ -42,7 +43,7 @@ async function make_request(name, phone, act) {
         try {
             const res = await axios.delete(endpoint, {data: body});
             console.log(res);
-            alert(`Sorry to see you go, ${name} at ${phone} has been successfully deleted.`);
+            alert(`Sorry to see you go, ${name} at ${pretty_phone} has been successfully deleted.`);
         } catch (e) {
             console.error(e);
             alert("Something went wrong, make sure all info is correct and the user exists.");
