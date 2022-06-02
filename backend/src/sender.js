@@ -20,37 +20,51 @@ async function getImage() {
     }
 }
 
-function send_error() {
-    console.log("DynamoDB Issue!")
+const dog_image = await getImage();
+
+function send_error(e) {
+    console.log(e);
 }
 
-function send_picture(user, image) {
+async function send_picture(user, image) {
     const user_name = user.Name;
     const user_phone = user.Phone;
+    try{
+        const message = await twClient.messages.create({
+            body: `Hi ${user_name}! Enjoy your dog :)`,
+            from: twlPhone,
+            mediaUrl: [image],
+            to: user_phone
+          });
+        return message;
+    } catch (e) {
+        return e;
+    }
+}
 
-    twClient.messages.create({
-        body: `Hi ${user_name}! Enjoy your dog :)`,
-        from: twlPhone,
-        mediaUrl: [image],
-        to: user_phone
-      }).then((message) => {
-          console.log("Sent!", message.sid);
-          return callback();
-      }).catch((e) => {
-          console.log(e);
-          return callback(e);
-      });
+async function send_to_user(user) {
+    if (!dog_image) {
+        send_error("Image not available");
+        return;
+    }
+    console.log("Using image:", dog_image);
+    const message = await send_picture(user, dog_image);
+    
+    if (message.sid) {
+        console.log(message.sid);
+    } else {
+        console.log(message);
+    }    
 }
 
 async function send() {
-    const img = await getImage();
     const users = await allUsers();
-    if (!users || !img) {
-        send_error();
+    if (!users) {
+        send_error("DynamoDB Issue!");
         return ;
     }
-    console.log("Attempting to send to users in list", users, ", sending image", img);
-    users.forEach(user => send_picture(user, img))
+    console.log("Attempting to send to users in list", users);
+    users.forEach(send_to_user);
     return ; 
 }
 
