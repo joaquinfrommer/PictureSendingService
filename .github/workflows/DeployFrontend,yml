@@ -1,5 +1,9 @@
-on: [push]
-name: Production Deploy
+name: deploy frontend
+on:
+  push:
+    branches:
+      - main
+
 defaults:
   run:
     working-directory: ./frontend
