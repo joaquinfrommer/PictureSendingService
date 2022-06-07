@@ -21,8 +21,6 @@ async function getImage() {
     }
 }
 
-const dog_image = await getImage();
-
 function send_error(e) {
     console.log(e);
 }
@@ -73,6 +71,7 @@ async function send_picture(user, image) {
 }
 
 async function send_to_user(user) {
+    const dog_image = await getImage();
     if (!dog_image) {
         send_error("Image not available");
         return;
@@ -82,9 +81,12 @@ async function send_to_user(user) {
     
     if (message.sid) {
         console.log(message.sid);
+        return 1;
     } else {
         send_error(message);
-    }    
+        return 0;
+    }   
+    return 0; 
 }
 
 async function send() {
@@ -94,8 +96,14 @@ async function send() {
         return ;
     }
     console.log("Attempting to send to users in list", users);
-    users.forEach(send_to_user);
-    return ; 
+
+    let num_sent = 0;
+    for (const user of users){
+        const res = await send_to_user(user);
+        num_sent += res;
+    }
+    console.log(`Sent ${num_sent}/${users.length} messages.`)
+    return 0; 
 }
 
 export const handler = send;
