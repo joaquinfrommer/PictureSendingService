@@ -1,0 +1,29 @@
+on: [push]
+name: Production Deploy
+defaults:
+  run:
+    working-directory: ./frontend
+
+jobs:
+  deploy_frontend: 
+      name: deploy react frontend
+      runs-on: ubuntu-lates
+
+      steps:
+        - uses: actions/checkout@v2
+        - name: Use Node.js
+          uses: actions/setup-node@v1
+          with:
+            node-version: '14.x'
+        - name: Install dependencies
+          run: npm ci
+        - name: Deploy to S3
+          uses: jakejarvis/s3-sync-action@master
+          with:
+            args: --follow-symlinks --delete
+          env:
+            AWS_S3_BUCKET: dogsender.com
+            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_AKEY_ID }}
+            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_AKEY_KEY }}
+            AWS_REGION: us-east-1
+            SOURCE_DIR: 'frontend/src'
