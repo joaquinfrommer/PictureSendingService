@@ -20,13 +20,11 @@ async function getImage() {
     }
 }
 
-const dog_image = await getImage();
-
 function send_error(e) {
     console.log(e);
 }
 
-async function send_picture(user, image) {
+async function send_picture(user, image, callback) {
     const user_name = user.Name;
     const user_phone = user.Phone;
     try{
@@ -36,37 +34,41 @@ async function send_picture(user, image) {
             mediaUrl: [image],
             to: user_phone
           });
-        callback(null, {result: 'success'});
-        return message;
+
+        console.log(message.sid);
+        return callback(null, {result: 'success'});
+        // return message;
     } catch (e) {
-        callback("error");
-        return e;
+        send_error(e);
+        return callback("error");
+        // return e
     }
 }
 
-async function send_to_user(user) {
+// async function send_picture() {
+    
+// }
+
+async function send_to_user(user, callback) {
+    const dog_image = await getImage();
     if (!dog_image) {
         send_error("Image not available");
         return;
     }
     console.log("Using image:", dog_image);
-    const message = await send_picture(user, dog_image);
-    
-    if (message.sid) {
-        console.log(message.sid);
-    } else {
-        console.log(message);
-    }    
+    const message = await send_picture(user, dog_image, callback);
+    console.log(message);
+    return ;
 }
 
-async function send() {
+async function send(event, context, callback) {
     const users = await allUsers();
     if (!users) {
         send_error("DynamoDB Issue!");
         return ;
     }
     console.log("Attempting to send to users in list", users);
-    users.forEach(send_to_user);
+    users.forEach(user => send_to_user(user, callback));
     return ; 
 }
 
