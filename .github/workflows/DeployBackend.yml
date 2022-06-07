@@ -1,5 +1,5 @@
 
-name: deploy zip to lambda
+name: deploy backend
 on:
   push:
     branches:
