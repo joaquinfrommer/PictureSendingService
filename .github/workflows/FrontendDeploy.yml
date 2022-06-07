@@ -11,7 +11,7 @@ defaults:
 jobs:
   deploy_frontend: 
       name: deploy react frontend
-      runs-on: ubuntu-lates
+      runs-on: ubuntu-latest
 
       steps:
         - uses: actions/checkout@v2
@@ -21,6 +21,10 @@ jobs:
             node-version: '14.x'
         - name: Install dependencies
           run: npm ci
+        - name: Build
+          env:
+            CI: false
+          run: npm run-script build
         - name: Deploy to S3
           uses: jakejarvis/s3-sync-action@master
           with:
