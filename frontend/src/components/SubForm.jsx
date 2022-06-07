@@ -26,7 +26,7 @@ const endpoint = 'https://jblcb1xi2a.execute-api.us-east-1.amazonaws.com/prod/'
 async function make_request(name, phone, act) {
     const p1 = "+1";
     const format_phone = p1 + phone;
-    pretty_phone = `(${phone.substring(0,3)})-${phone.substring(3,6)}-${phone.substring(6)}`
+    const pretty_phone = `(${phone.substring(0,3)})-${phone.substring(3,6)}-${phone.substring(6)}`
     const body = {"name": name, "phone": format_phone};
 
     if(act === 'add') {
