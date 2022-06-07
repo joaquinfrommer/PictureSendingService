@@ -30,4 +30,4 @@ jobs:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_AKEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_AKEY_KEY }}
             AWS_REGION: us-east-1
-            SOURCE_DIR: 'frontend/src'
+            SOURCE_DIR: 'frontend/build'
