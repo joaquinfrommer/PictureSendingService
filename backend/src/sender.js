@@ -25,56 +25,54 @@ function send_error(e) {
     console.log(e);
 }
 
-// async function send_picture(user, image) {
-//     const user_name = user.Name;
-//     const user_phone = user.Phone;
-//     try{
-//         const message = await twClient.messages.create({
-//             body: `Hi ${user_name}! Enjoy your dog :)`,
-//             from: twlPhone,
-//             mediaUrl: [image],
-//             to: user_phone
-//           });
-//         callback(null, {result: 'success'});
-//         return message;
-//     } catch (e) {
-//         callback("error");
-//         return e;
-//     }
-// }
-
 async function send_picture(user, image) {
     const user_name = user.Name;
     const user_phone = user.Phone;
-    const contents = {
-        body: `Hi ${user_name}! Enjoy your dog :)`,
-        from: twlPhone,
-        mediaUrl: [image],
-        to: user_phone
-    };
-    const auth = { 
-        auth: {
-            username: accountSid,
-            password: authToken
-        }
-    }
-    
     try{
-        const res = await axios.post(twilio_endpoint, contents, auth);
-        const message = res.data;
+        const message = await twClient.messages.create({
+            body: `Hi ${user_name}! Enjoy your dog :)`,
+            from: twlPhone,
+            mediaUrl: [image],
+            to: user_phone
+          });
         return message;
     } catch (e) {
         return e;
     }
-    
-    return "Should not be reachable!";
 }
+
+// async function send_picture(user, image) {
+//     const user_name = user.Name;
+//     const user_phone = user.Phone;
+//     const contents = {
+//         body: `Hi ${user_name}! Enjoy your dog :)`,
+//         from: twlPhone,
+//         mediaUrl: [image],
+//         to: user_phone
+//     };
+//     const auth = { 
+//         auth: {
+//             username: accountSid,
+//             password: authToken
+//         }
+//     }
+    
+//     try{
+//         const res = await axios.post(twilio_endpoint, contents, auth);
+//         const message = res.data;
+//         return message;
+//     } catch (e) {
+//         return e;
+//     }
+    
+//     return "Should not be reachable!";
+// }
 
 async function send_to_user(user) {
     const dog_image = await getImage();
     if (!dog_image) {
         send_error("Image not available");
-        return;
+        return 0;
     }
     console.log("Using image:", dog_image);
     const message = await send_picture(user, dog_image);
