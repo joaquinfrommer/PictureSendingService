@@ -41,33 +41,6 @@ async function send_picture(user, image) {
     }
 }
 
-// async function send_picture(user, image) {
-//     const user_name = user.Name;
-//     const user_phone = user.Phone;
-//     const contents = {
-//         body: `Hi ${user_name}! Enjoy your dog :)`,
-//         from: twlPhone,
-//         mediaUrl: [image],
-//         to: user_phone
-//     };
-//     const auth = { 
-//         auth: {
-//             username: accountSid,
-//             password: authToken
-//         }
-//     }
-    
-//     try{
-//         const res = await axios.post(twilio_endpoint, contents, auth);
-//         const message = res.data;
-//         return message;
-//     } catch (e) {
-//         return e;
-//     }
-    
-//     return "Should not be reachable!";
-// }
-
 async function send_to_user(user) {
     const dog_image = await getImage();
     if (!dog_image) {
@@ -93,13 +66,14 @@ async function send() {
         send_error("DynamoDB Issue!");
         return ;
     }
+    
     console.log("Attempting to send to users in list", users);
-
     let num_sent = 0;
     for (const user of users){
         const res = await send_to_user(user);
         num_sent += res;
     }
+
     console.log(`Sent ${num_sent}/${users.length} messages.`)
     return 0; 
 }
