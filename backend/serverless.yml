@@ -26,8 +26,7 @@ functions:
   Sender:
     handler: src/sender.handler
     events:
-      - schedule: rate(12 hours)
-      - schedule: cron(0 10 * * ? *)
+      - schedule: cron(0 4/12 * * ? *)
 
 resources:
   Resources:
